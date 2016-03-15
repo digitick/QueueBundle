@@ -1,0 +1,23 @@
+{
+    "name": "digitick/queue-bundle",
+    "authors": [
+        {
+            "name": "Mallory Mollo",
+            "email": "mallory.mollo@digitick.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/digitick/queue.git"
+        }
+    ],
+    "require": {
+        "digitick/queue": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Digitick\\QueueBundle\\": "src/Digitick/QueueBundle"
+        }
+    }
+}

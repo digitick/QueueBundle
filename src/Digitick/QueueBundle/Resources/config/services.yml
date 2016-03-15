@@ -1,0 +1,22 @@
+parameters:
+    digitick_queue.class: Digitick\Queue\Queue
+    digitick_queue.exchange_name: sampleExchangeName
+    digitick_queue.queue_name: sampleQueueName
+    digitick_queue.exchange_key: sampleExchangeKey
+    digitick_queue.amqp.class: Digitick\PhpAmqpLib\Connection\AMQPStreamConnection
+    digitick_queue.amqp.host: localhost
+    digitick_queue.amqp.port: 5672
+    digitick_queue.amqp.user: guest
+    digitick_queue.amqp.password: guest
+    digitick_queue.amqp.vhost: /
+    digitick_queue.amqp.enabled: true
+    
+services:
+    digitick_queue.amqp:
+        class: %digitick_queue.amqp.class%
+        arguments: [%digitick_queue.amqp.host%, %digitick_queue.amqp.port%, %digitick_queue.amqp.user%, %digitick_queue.amqp.password%, %digitick_queue.amqp.vhost%, %digitick_queue.amqp.enabled%]
+    digitick_queue:
+        class: %digitick_queue.class%
+        arguments: [@digitick_queue.amqp, %digitick_queue.exchange_name%, "direct"]
+        calls:
+            - [addQueue, [%digitick_queue.queue_name%, %digitick_queue.exchange_key%]]
